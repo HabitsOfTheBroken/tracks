@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ARYA RACHEL FRIDAY v3</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="/eel.js"></script>
+    <style>
+        /* INLINE CSS AS FALLBACK */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #f7fafc;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .header {
+            background: #2d3748;
+            border-bottom: 2px solid #805ad5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon { font-size: 28px; }
+        .app-title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .app-version {
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        .status-bar { display: flex; gap: 20px; }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .status-dot.online { background: #48bb78; }
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .welcome-message {
+            background: #4a5568;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #805ad5;
+        }
+        .welcome-message h1 {
+            margin-bottom: 15px;
+            color: #805ad5;
+        }
+        .system-info {
+            margin: 20px 0;
+            padding: 20px;
+            background: #2d3748;
+            border-radius: 8px;
+        }
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #805ad5;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #6b46c1; }
+        .chat-section {
+            background: #4a5568;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            background: #2d3748;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #4a5568;
+        }
+        .message {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: #2d3748;
+            border-radius: 6px;
+            border-left: 3px solid #805ad5;
+        }
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #chatInput {
+            flex: 1;
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 6px;
+            padding: 12px;
+            color: #f7fafc;
+            resize: none;
+            font-family: inherit;
+        }
+        #chatInput:focus {
+            outline: none;
+            border-color: #805ad5;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #2d3748; }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #805ad5; }
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">🧠</div>
+                <div>
+                    <div class="app-title">ARYA RACHEL FRIDAY</div>
+                    <div class="app-version">v3.0.0 - Enhanced Core</div>
+                </div>
+            </div>
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="status-dot online"></div>
+                    <span>System: Online</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="welcome-message">
+                <h1>🎉 Arya is Running!</h1>
+                <p>Your enhanced Arya Rachel Friday v3.0.0 is successfully running.</p>
+                <p>Next steps: Create your plugin ecosystem and political data tools.</p>
+                
+                <div class="system-info">
+                    <h3>🧠 System Status</h3>
+                    <div id="systemStatus">Loading...</div>
+                </div>
+                
+                <div class="quick-actions">
+                    <button onclick="testConnection()">Test Connection</button>
+                    <button onclick="getMemory()">View Memory</button>
+                    <button onclick="getPlugins()">List Plugins</button>
+                    <button id="uploadBtn">📁 Upload Files</button>
+                    <button onclick="showSupportedFiles()">Supported Files</button>
+                    <button onclick="createPlugin()">🧩 Create Plugin</button>
+                    <input type="file" id="fileInput" multiple>
+                </div>
+            </div>
+            
+            <!-- CHAT INTERFACE -->
+            <div class="chat-section">
+                <h3>💬 Chat with Arya</h3>
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message">🧠 Arya Rachel Friday v3.0.0 initialized</div>
+                </div>
+                <div class="chat-input-container">
+                    <textarea id="chatInput" placeholder="Type your message to Arya... (Shift+Enter for new line)" rows="3"></textarea>
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arya Rachel Friday - GUI JavaScript
+        console.log("🧠 Arya GUI JavaScript loaded");
+
+        // Show messages in chat
+        function showMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            console.log("💬", message);
+        }
+
+        // Test connection to Python
+        async function testConnection() {
+            try {
+                console.log("🔗 Testing connection...");
+                const memory = await eel.get_enhanced_memory()();
+                document.getElementById('systemStatus').innerHTML = `
+                    <strong>✅ System Online</strong><br>
+                    Conversations: ${memory.stats.conversation_count}<br>
+                    Plugins: ${memory.stats.total_plugins}<br>
+                    Uptime: ${Math.round(memory.stats.uptime / 60)} minutes
+                `;
+                showMessage('✅ Connection test successful!');
+            } catch (error) {
+                console.error("Connection error:", error);
+                showMessage('❌ Connection failed: ' + error);
+            }
+        }
+
+        // Get memory data
+        async function getMemory() {
+            try {
+                const memory = await eel.get_enhanced_memory()();
+                showMessage('🧠 Memory loaded: ' + memory.stats.conversation_count + ' conversations');
+            } catch (error) {
+                showMessage('❌ Failed to get memory: ' + error);
+            }
+        }
+
+        // List plugins
+        async function getPlugins() {
+            try {
+                const plugins = await eel.get_plugin_status()();
+                const pluginList = Object.keys(plugins).join(', ') || 'No plugins loaded';
+                showMessage('🧩 Loaded plugins: ' + pluginList);
+            } catch (error) {
+                showMessage('❌ Failed to get plugins: ' + error);
+            }
+        }
+
+        // Send message to Arya
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                showMessage('You: ' + message);
+                input.value = '';
+                
+                try {
+                    console.log("📨 Sending message to Arya:", message);
+                    const response = await eel.send_message(message)();
+                    showMessage('Arya: ' + response);
+                } catch (error) {
+                    console.error("Send message error:", error);
+                    showMessage('❌ Error: ' + error);
+                }
+            }
+        }
+
+        // File upload functionality
+        function setupFileUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadBtn = document.getElementById('uploadBtn');
+            
+            uploadBtn.addEventListener('click', () => {
+                console.log("📁 Upload button clicked");
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', async function(e) {
+                const files = e.target.files;
+                if (!files.length) return;
+                
+                for (let file of files) {
+                    console.log("📤 Selected file:", file.name, file.size, file.type);
+                    showMessage(`📤 Uploading: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`);
+                    
+                    try {
+                        const reader = new FileReader();
+                        
+                        reader.onload = async function(e) {
+                            try {
+                                const fileData = e.target.result;
+                                console.log("📊 File read successfully, size:", fileData.length);
+                                
+                                const result = await eel.upload_file(fileData, file.name, file.type)();
+                                showMessage(result);
+                            } catch (error) {
+                                console.error("Upload error:", error);
+                                showMessage('❌ Upload error: ' + error);
+                            }
+                        };
+                        
+                        reader.onerror = function(error) {
+                            console.error("File read error:", error);
+                            showMessage('❌ File read error: ' + error);
+                        };
+                        
+                        reader.readAsDataURL(file);
+                        
+                    } catch (error) {
+                        console.error("File processing error:", error);
+                        showMessage('❌ File processing error: ' + error);
+                    }
+                }
+                
+                // Reset input
+                fileInput.value = '';
+            });
+        }
+
+        // Get supported file types
+        async function showSupportedFiles() {
+            try {
+                const supported = await eel.get_supported_file_types()();
+                let message = '📁 Supported file types:\n';
+                
+                for (const [category, extensions] of Object.entries(supported)) {
+                    message += `• ${category}: ${extensions.join(', ')}\n`;
+                }
+                
+                showMessage(message);
+            } catch (error) {
+                showMessage('❌ Failed to get supported files: ' + error);
+            }
+        }
+
+        // Create a new plugin
+        async function createPlugin() {
+            const pluginName = prompt("Enter plugin name:");
+            if (pluginName) {
+                try {
+                    const result = await eel.create_plugin(pluginName)();
+                    showMessage(result);
+                } catch (error) {
+                    showMessage('❌ Failed to create plugin: ' + error);
+                }
+            }
+        }
+
+        // Handle Enter key in chat
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("🚀 Arya GUI initialized");
+            setupFileUpload();
+            
+            // Test connection after a short delay
+            setTimeout(() => {
+                testConnection();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

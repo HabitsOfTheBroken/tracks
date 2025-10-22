@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    color: #f7fafc;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* HEADER */
+.header {
+    background: #2d3748;
+    border-bottom: 2px solid #805ad5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 28px;
+}
+
+.app-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.app-version {
+    font-size: 12px;
+    color: #a0aec0;
+}
+
+.status-bar {
+    display: flex;
+    gap: 20px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-dot.online {
+    background: #48bb78;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.welcome-message {
+    background: #4a5568;
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 4px solid #805ad5;
+}
+
+.welcome-message h1 {
+    margin-bottom: 15px;
+    color: #805ad5;
+}
+
+.system-info {
+    margin: 20px 0;
+    padding: 20px;
+    background: #2d3748;
+    border-radius: 8px;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    background: #805ad5;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #6b46c1;
+}
+
+/* CHAT SECTION */
+.chat-section {
+    background: #4a5568;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    background: #2d3748;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+#chatInput {
+    flex: 1;
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    border-radius: 6px;
+    padding: 12px;
+    color: #f7fafc;
+    resize: none;
+}
+
+#chatInput:focus {
+    outline: none;
+    border-color: #805ad5;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2d3748;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a5568;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #805ad5;
+}
+/* File upload styles */
+.file-upload-section {
+    background: #4a5568;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.upload-area {
+    border: 2px dashed #805ad5;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.upload-area:hover {
+    background: #2d3748;
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.file-list {
+    margin-top: 15px;
+}
+
+.file-item {
+    background: #2d3748;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-name {
+    flex: 1;
+}
+
+.file-size {
+    color: #a0aec0;
+    font-size: 12px;
+}
